@@ -2,6 +2,8 @@ import customtkinter as ctk
 import config
 
 from ui.sidebar import Sidebar
+from ui.navbar import Navbar
+
 class MainWindow(ctk.CTk):
 
     def __init__(self):
@@ -42,23 +44,7 @@ class MainWindow(ctk.CTk):
             rowspan=2,
             sticky="nsew"
         )
-
-        self.crear_navbar()
-
-        self.crear_contenido()
-        
-
-    # =====================================================
-
-
-    def crear_navbar(self):
-
-        self.navbar = ctk.CTkFrame(
-            self,
-            height=config.NAVBAR_HEIGHT,
-            fg_color=config.NAVBAR_COLOR,
-            corner_radius=0
-        )
+        self.navbar = Navbar(self)
 
         self.navbar.grid(
             row=0,
@@ -66,7 +52,10 @@ class MainWindow(ctk.CTk):
             sticky="ew"
         )
 
-        self.navbar.grid_propagate(False)
+        self.crear_contenido()
+        
+
+    # =====================================================
 
     # =====================================================
 
