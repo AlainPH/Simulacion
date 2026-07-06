@@ -23,12 +23,10 @@ class GeneradorPseudoaleatorio:
 
             ri = x / 10000
 
-            resultados.append(
-                {
-                    "Semilla": x,
-                    "Ri": ri
-                }
-            )
+            resultados.append({
+                "Semilla": x,
+                "Ri": ri
+            })
 
         return pd.DataFrame(resultados)
 
@@ -53,12 +51,10 @@ class GeneradorPseudoaleatorio:
 
             ri = nuevo / 10000
 
-            resultados.append(
-                {
-                    "Semilla": nuevo,
-                    "Ri": ri
-                }
-            )
+            resultados.append({
+                "Semilla": nuevo,
+                "Ri": ri
+            })
 
             a = b
             b = nuevo
@@ -85,12 +81,10 @@ class GeneradorPseudoaleatorio:
 
             ri = x / 10000
 
-            resultados.append(
-                {
-                    "Semilla": x,
-                    "Ri": ri
-                }
-            )
+            resultados.append({
+                "Semilla": x,
+                "Ri": ri
+            })
 
         return pd.DataFrame(resultados)
 
@@ -110,11 +104,9 @@ class GeneradorPseudoaleatorio:
 
             ri = x / m
 
-            resultados.append(
-                {
-                    "Semilla": x,
-                    "Ri": ri
-                }
-            )
+            resultados.append({
+                "Semilla": x,
+                "Ri": ri
+            })
 
         return pd.DataFrame(resultados)
