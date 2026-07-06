@@ -13,19 +13,36 @@ class GeneradorPseudoaleatorio:
 
         x = int(semilla)
 
-        for _ in range(cantidad):
+        d = len(str(semilla).strip())
 
-            cuadrado = str(x ** 2).zfill(8)
+        for i in range(1, cantidad + 1):
 
-            medio = cuadrado[2:6]
+            cuadrado = x ** 2
 
-            x = int(medio)
+            cuadrado_str = str(cuadrado).zfill(2 * d)
 
-            ri = x / 10000
+            start_idx = d // 2
+
+            medio_str = cuadrado_str[start_idx : start_idx + d]
+
+            x_anterior = x
+
+            x = int(medio_str)
+
+            ri = x / (10 ** d)
 
             resultados.append({
-                "Semilla": x,
+
+                "i": i,
+
+                "Xi": x_anterior,
+
+                "Xi^2": cuadrado,
+
+                "Xi+1": x,
+
                 "Ri": ri
+
             })
 
         return pd.DataFrame(resultados)
@@ -39,24 +56,43 @@ class GeneradorPseudoaleatorio:
         resultados = []
 
         a = int(x1)
+
         b = int(x2)
 
-        for _ in range(cantidad):
+        d = len(str(x1).strip())
 
-            producto = str(a * b).zfill(8)
+        for i in range(1, cantidad + 1):
 
-            medio = producto[2:6]
+            producto = a * b
 
-            nuevo = int(medio)
+            producto_str = str(producto).zfill(2 * d)
 
-            ri = nuevo / 10000
+            start_idx = d // 2
+
+            medio_str = producto_str[start_idx : start_idx + d]
+
+            nuevo = int(medio_str)
+
+            ri = nuevo / (10 ** d)
 
             resultados.append({
-                "Semilla": nuevo,
+
+                "i": i,
+
+                "Xi-1": a,
+
+                "Xi": b,
+
+                "Producto": producto,
+
+                "Xi+1": nuevo,
+
                 "Ri": ri
+
             })
 
             a = b
+
             b = nuevo
 
         return pd.DataFrame(resultados)
@@ -71,19 +107,40 @@ class GeneradorPseudoaleatorio:
 
         x = int(semilla)
 
-        for _ in range(cantidad):
+        const = int(constante)
 
-            producto = str(x * constante).zfill(8)
+        d = len(str(semilla).strip())
 
-            medio = producto[2:6]
+        for i in range(1, cantidad + 1):
 
-            x = int(medio)
+            producto = x * const
 
-            ri = x / 10000
+            producto_str = str(producto).zfill(2 * d)
+
+            start_idx = d // 2
+
+            medio_str = producto_str[start_idx : start_idx + d]
+
+            x_anterior = x
+
+            x = int(medio_str)
+
+            ri = x / (10 ** d)
 
             resultados.append({
-                "Semilla": x,
+
+                "i": i,
+
+                "a": const,
+
+                "Xi": x_anterior,
+
+                "Producto": producto,
+
+                "Xi+1": x,
+
                 "Ri": ri
+
             })
 
         return pd.DataFrame(resultados)
@@ -98,15 +155,28 @@ class GeneradorPseudoaleatorio:
 
         x = int(x0)
 
-        for _ in range(cantidad):
+        for i in range(1, cantidad + 1):
 
-            x = (a * x + c) % m
+            operacion = a * x + c
 
-            ri = x / m
+            siguiente = operacion % m
+
+            ri = siguiente / m
 
             resultados.append({
-                "Semilla": x,
+
+                "i": i,
+
+                "Xi": x,
+
+                "a * Xi + c": operacion,
+
+                "Xi+1": siguiente,
+
                 "Ri": ri
+
             })
+
+            x = siguiente
 
         return pd.DataFrame(resultados)

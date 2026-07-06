@@ -4,7 +4,7 @@ import tkinter as tk
 class GridCanvas(tk.Canvas):
 
     def __init__(self, master, filas=120, columnas=120, tam=5):
-        super().__init__(master, bg="white", highlightthickness=0)
+        super().__init__(master, bg="#1E1F29", highlightthickness=0)
 
         self.filas = filas
         self.columnas = columnas
@@ -37,8 +37,8 @@ class GridCanvas(tk.Canvas):
 
                 rect = self.create_rectangle(
                     x1, y1, x2, y2,
-                    fill="white",
-                    outline=""
+                    fill="#2F3242",
+                    outline="#1E1F29"
                 )
 
                 fila.append(rect)
@@ -49,13 +49,13 @@ class GridCanvas(tk.Canvas):
 
     def dibujar(self, grid):
 
-        # Colores del sistema epidemiológico
+        # Colores del sistema epidemiológico (Estilo Neón Premium)
         colores = {
-            0: "white",   # vacío
-            1: "#e0e0e0", # sano
-            2: "#e74c3c", # infectado
-            3: "#2ecc71", # recuperado
-            4: "#2c3e50"  # muerto
+            0: "#1E1F29",   # vacío
+            1: "#2F3242",   # sano (color de tarjeta)
+            2: "#FF4757",   # infectado (rojo neón)
+            3: "#2ED573",   # recuperado (verde neón)
+            4: "#747D8C"    # muerto (gris pizarra)
         }
 
         for i in range(self.filas):
@@ -65,5 +65,5 @@ class GridCanvas(tk.Canvas):
 
                 self.itemconfig(
                     self.rectangulos[i][j],
-                    fill=colores.get(estado, "white")
+                    fill=colores.get(estado, "#2F3242")
                 )

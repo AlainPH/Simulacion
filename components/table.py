@@ -11,6 +11,36 @@ class DataTable(ttk.Frame):
         self.columnas = columnas
 
         # ===========================
+        # Estilo Oscuro para Treeview
+        # ===========================
+        style = ttk.Style()
+        style.theme_use("clam")
+        style.configure(
+            "Treeview",
+            background="#252836",
+            foreground="#FFFFFF",
+            rowheight=26,
+            fieldbackground="#252836",
+            font=("Segoe UI", 11)
+        )
+        style.map(
+            "Treeview",
+            background=[("selected", "#4F8EF7")],
+            foreground=[("selected", "#FFFFFF")]
+        )
+        style.configure(
+            "Treeview.Heading",
+            background="#2F3242",
+            foreground="#FFFFFF",
+            font=("Segoe UI", 11, "bold"),
+            relief="flat"
+        )
+        style.map(
+            "Treeview.Heading",
+            background=[("active", "#3E4256")]
+        )
+
+        # ===========================
         # Scroll vertical
         # ===========================
 
@@ -66,6 +96,30 @@ class DataTable(ttk.Frame):
                 columna,
                 width=140,
                 anchor="center"
+            )
+
+    # =====================================
+
+    def actualizar_columnas(self, nuevas_columnas):
+
+        self.columnas = nuevas_columnas
+
+        self.limpiar()
+
+        self.tree["columns"] = nuevas_columnas
+
+        for columna in nuevas_columnas:
+
+            self.tree.heading(columna, text=columna)
+
+            self.tree.column(
+
+                columna,
+
+                width=140,
+
+                anchor="center"
+
             )
 
     # =====================================
