@@ -3,7 +3,7 @@ import config
 
 from ui.sidebar import Sidebar
 from ui.navbar import Navbar
-
+from ui.dashboard import Dashboard
 class MainWindow(ctk.CTk):
 
     def __init__(self):
@@ -36,24 +36,26 @@ class MainWindow(ctk.CTk):
         self.grid_rowconfigure(1, weight=1)
 
         # Crear interfaz
+       # 1. Sidebar
         self.sidebar = Sidebar(self)
+        self.sidebar.grid(row=0, column=0, rowspan=2, sticky="nsew")
 
-        self.sidebar.grid(
-            row=0,
-            column=0,
-            rowspan=2,
-            sticky="nsew"
-        )
+        # 2. Navbar
         self.navbar = Navbar(self)
+        self.navbar.grid(row=0, column=1, sticky="ew")
 
-        self.navbar.grid(
-            row=0,
-            column=1,
-            sticky="ew"
-        )
-
+        # 3. Contenido
         self.crear_contenido()
-        
+
+        # 4. Dashboard
+        self.dashboard = Dashboard(self.content)
+        self.dashboard.grid(
+    row=0,
+    column=0,
+    sticky="nsew",
+    padx=20,
+    pady=20
+)
 
     # =====================================================
 
